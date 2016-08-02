@@ -1,0 +1,35 @@
+﻿@model IEnumerable<William_Santisteban_02_08_2016.Models.REGLAMENTO>
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Listado de Reglamentos</h2>
+<a href="@Url.Action("Agregar", "Reglamento")" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-record"></span> Agregar Reglamento</a>
+<table class="table table-striped">
+    <thead>
+        <tr>
+           <td>Identificacion</td>
+            <td>Nombre</td>
+            <td>Descripcion</td>
+            <td>Fecha Confección</td>
+            <td>Fecha Vigencia</td>
+            <td>Acciones</td>
+        </tr>
+    </thead>
+    <tbody>
+        <tr>
+        @foreach (var reglamento in Model)
+        {
+            <td>@Html.DisplayFor(model => reglamento.ID_REGLAMENTO)</td>
+            <td>@Html.DisplayFor(model => reglamento.NOMBRE_REGLAMENTO)</td>
+            <td>@Html.DisplayFor(model => reglamento.DESC_REGLAMENTO)</td>
+            <td>@Html.DisplayFor(model => reglamento.FECHA_VIGENCIA)</td>
+            <td>@Html.DisplayFor(model => reglamento.FECHA_CONFECCION)</td>
+            <td class="text-center">
+                <a href="@Url.Action("Editar", "Reglamento", new { id = reglamento.ID_REGLAMENTO })" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Editar</a>
+                <a href="@Url.Action("Eliminar", "Reglamento", new { id = reglamento.ID_REGLAMENTO })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
+            </td>
+        }
+        </tr>
+    </tbody>
+</table>

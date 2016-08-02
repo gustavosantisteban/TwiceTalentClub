@@ -1,0 +1,226 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="ClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="CLUB">
+          <Key>
+            <PropertyRef Name="ID_CLUB" />
+          </Key>
+          <Property Name="ID_CLUB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESC_CLUB" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="ID_REGLAMENTO" Type="int" />
+        </EntityType>
+        <EntityType Name="CLUB_DEPORTE">
+          <Key>
+            <PropertyRef Name="ID_CLUB" />
+            <PropertyRef Name="ID_DEPORTE" />
+          </Key>
+          <Property Name="ID_CLUB" Type="int" Nullable="false" />
+          <Property Name="ID_DEPORTE" Type="int" Nullable="false" />
+        </EntityType>
+        <EntityType Name="DEPORTE">
+          <Key>
+            <PropertyRef Name="ID_DEPORTE" />
+          </Key>
+          <Property Name="ID_DEPORTE" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="DESC_DEPORTE" Type="nvarchar" MaxLength="200" Nullable="false" />
+        </EntityType>
+        <EntityType Name="REGLAMENTO">
+          <Key>
+            <PropertyRef Name="ID_REGLAMENTO" />
+          </Key>
+          <Property Name="ID_REGLAMENTO" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="NOMBRE_REGLAMENTO" Type="nvarchar" MaxLength="100" Nullable="false" />
+          <Property Name="DESC_REGLAMENTO" Type="nvarchar" MaxLength="500" Nullable="false" />
+          <Property Name="ESTADO" Type="nvarchar" MaxLength="50" Nullable="false" />
+          <Property Name="FECHA_CONFECCION" Type="datetime" Nullable="false" />
+          <Property Name="FECHA_VIGENCIA" Type="datetime" Nullable="false" />
+        </EntityType>
+        <Association Name="FK_CLUB">
+          <End Role="CLUB" Type="Self.CLUB" Multiplicity="1" />
+          <End Role="CLUB_DEPORTE" Type="Self.CLUB_DEPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CLUB">
+              <PropertyRef Name="ID_CLUB" />
+            </Principal>
+            <Dependent Role="CLUB_DEPORTE">
+              <PropertyRef Name="ID_CLUB" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DEPORTE">
+          <End Role="DEPORTE" Type="Self.DEPORTE" Multiplicity="1" />
+          <End Role="CLUB_DEPORTE" Type="Self.CLUB_DEPORTE" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="DEPORTE">
+              <PropertyRef Name="ID_DEPORTE" />
+            </Principal>
+            <Dependent Role="CLUB_DEPORTE">
+              <PropertyRef Name="ID_DEPORTE" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_REGLAMENTO">
+          <End Role="REGLAMENTO" Type="Self.REGLAMENTO" Multiplicity="0..1" />
+          <End Role="CLUB" Type="Self.CLUB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGLAMENTO">
+              <PropertyRef Name="ID_REGLAMENTO" />
+            </Principal>
+            <Dependent Role="CLUB">
+              <PropertyRef Name="ID_REGLAMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="ClubModelStoreContainer">
+          <EntitySet Name="CLUB" EntityType="Self.CLUB" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CLUB_DEPORTE" EntityType="Self.CLUB_DEPORTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="DEPORTE" EntityType="Self.DEPORTE" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="REGLAMENTO" EntityType="Self.REGLAMENTO" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_CLUB" Association="Self.FK_CLUB">
+            <End Role="CLUB" EntitySet="CLUB" />
+            <End Role="CLUB_DEPORTE" EntitySet="CLUB_DEPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DEPORTE" Association="Self.FK_DEPORTE">
+            <End Role="DEPORTE" EntitySet="DEPORTE" />
+            <End Role="CLUB_DEPORTE" EntitySet="CLUB_DEPORTE" />
+          </AssociationSet>
+          <AssociationSet Name="FK_REGLAMENTO" Association="Self.FK_REGLAMENTO">
+            <End Role="REGLAMENTO" EntitySet="REGLAMENTO" />
+            <End Role="CLUB" EntitySet="CLUB" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ClubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="CLUB">
+          <Key>
+            <PropertyRef Name="ID_CLUB" />
+          </Key>
+          <Property Name="ID_CLUB" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESC_CLUB" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ID_REGLAMENTO" Type="Int32" />
+          <NavigationProperty Name="REGLAMENTO" Relationship="Self.FK_REGLAMENTO" FromRole="CLUB" ToRole="REGLAMENTO" />
+          <NavigationProperty Name="DEPORTE" Relationship="Self.CLUB_DEPORTE" FromRole="CLUB" ToRole="DEPORTE" />
+        </EntityType>
+        <EntityType Name="DEPORTE">
+          <Key>
+            <PropertyRef Name="ID_DEPORTE" />
+          </Key>
+          <Property Name="ID_DEPORTE" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="DESC_DEPORTE" Type="String" MaxLength="200" FixedLength="false" Unicode="true" Nullable="false" />
+          <NavigationProperty Name="CLUB" Relationship="Self.CLUB_DEPORTE" FromRole="DEPORTE" ToRole="CLUB" />
+        </EntityType>
+        <EntityType Name="REGLAMENTO">
+          <Key>
+            <PropertyRef Name="ID_REGLAMENTO" />
+          </Key>
+          <Property Name="ID_REGLAMENTO" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="NOMBRE_REGLAMENTO" Type="String" MaxLength="100" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="DESC_REGLAMENTO" Type="String" MaxLength="500" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="ESTADO" Type="String" MaxLength="50" FixedLength="false" Unicode="true" Nullable="false" />
+          <Property Name="FECHA_CONFECCION" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="FECHA_VIGENCIA" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CLUB" Relationship="Self.FK_REGLAMENTO" FromRole="REGLAMENTO" ToRole="CLUB" />
+        </EntityType>
+        <Association Name="FK_REGLAMENTO">
+          <End Role="REGLAMENTO" Type="Self.REGLAMENTO" Multiplicity="0..1" />
+          <End Role="CLUB" Type="Self.CLUB" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="REGLAMENTO">
+              <PropertyRef Name="ID_REGLAMENTO" />
+            </Principal>
+            <Dependent Role="CLUB">
+              <PropertyRef Name="ID_REGLAMENTO" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="CLUB_DEPORTE">
+          <End Role="CLUB" Type="Self.CLUB" Multiplicity="*" />
+          <End Role="DEPORTE" Type="Self.DEPORTE" Multiplicity="*" />
+        </Association>
+        <EntityContainer Name="ClubContext" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="CLUB" EntityType="Self.CLUB" />
+          <EntitySet Name="DEPORTE" EntityType="Self.DEPORTE" />
+          <EntitySet Name="REGLAMENTO" EntityType="Self.REGLAMENTO" />
+          <AssociationSet Name="FK_REGLAMENTO" Association="Self.FK_REGLAMENTO">
+            <End Role="REGLAMENTO" EntitySet="REGLAMENTO" />
+            <End Role="CLUB" EntitySet="CLUB" />
+          </AssociationSet>
+          <AssociationSet Name="CLUB_DEPORTE" Association="Self.CLUB_DEPORTE">
+            <End Role="CLUB" EntitySet="CLUB" />
+            <End Role="DEPORTE" EntitySet="DEPORTE" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ClubModelStoreContainer" CdmEntityContainer="ClubContext">
+          <EntitySetMapping Name="CLUB">
+            <EntityTypeMapping TypeName="ClubModel.CLUB">
+              <MappingFragment StoreEntitySet="CLUB">
+                <ScalarProperty Name="ID_CLUB" ColumnName="ID_CLUB" />
+                <ScalarProperty Name="DESC_CLUB" ColumnName="DESC_CLUB" />
+                <ScalarProperty Name="ID_REGLAMENTO" ColumnName="ID_REGLAMENTO" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DEPORTE">
+            <EntityTypeMapping TypeName="ClubModel.DEPORTE">
+              <MappingFragment StoreEntitySet="DEPORTE">
+                <ScalarProperty Name="ID_DEPORTE" ColumnName="ID_DEPORTE" />
+                <ScalarProperty Name="DESC_DEPORTE" ColumnName="DESC_DEPORTE" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="REGLAMENTO">
+            <EntityTypeMapping TypeName="ClubModel.REGLAMENTO">
+              <MappingFragment StoreEntitySet="REGLAMENTO">
+                <ScalarProperty Name="ID_REGLAMENTO" ColumnName="ID_REGLAMENTO" />
+                <ScalarProperty Name="NOMBRE_REGLAMENTO" ColumnName="NOMBRE_REGLAMENTO" />
+                <ScalarProperty Name="DESC_REGLAMENTO" ColumnName="DESC_REGLAMENTO" />
+                <ScalarProperty Name="ESTADO" ColumnName="ESTADO" />
+                <ScalarProperty Name="FECHA_CONFECCION" ColumnName="FECHA_CONFECCION" />
+                <ScalarProperty Name="FECHA_VIGENCIA" ColumnName="FECHA_VIGENCIA" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="CLUB_DEPORTE" TypeName="ClubModel.CLUB_DEPORTE" StoreEntitySet="CLUB_DEPORTE">
+            <EndProperty Name="CLUB">
+              <ScalarProperty Name="ID_CLUB" ColumnName="ID_CLUB" />
+            </EndProperty>
+            <EndProperty Name="DEPORTE">
+              <ScalarProperty Name="ID_DEPORTE" ColumnName="ID_DEPORTE" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="false" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="None" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>
