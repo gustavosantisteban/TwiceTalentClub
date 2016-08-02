@@ -1,0 +1,72 @@
+﻿@model William_Santisteban_02_08_2016.Models.REGLAMENTO
+
+@{
+    ViewBag.Title = "Agregar";
+}
+
+<h2>Eliminar Reglamento</h2>
+<h3>Estas seguro que deseas Eliminar este Reglamento?</h3>
+
+    <div class="form-group">
+        @Html.Label("Nombre del Reglamento", new { @class = "col-md-3 control-label" })
+        <div class="col-md-3 col-xs-8 col-lg-3 input-group">
+            @Html.TextBoxFor(m => m.NOMBRE_REGLAMENTO, new { @class = "form-control", @disabled = "disabled" })
+            <span class="input-group-addon">
+                <span class="fa fa-wpforms">
+                </span>
+            </span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.Label("Descripcion", new { @class = "col-md-3 control-label" })
+        <div class="col-md-3 col-xs-8 col-lg-3  input-group">
+            @Html.TextAreaFor(m => m.DESC_REGLAMENTO, new { @class = "form-control", @disabled = "disabled" })
+        </div>
+    </div>
+
+        <div class="form-group">
+            @Html.Label("Estado", new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3  input-group">
+                @Html.DropDownListFor(m => m.ESTADO, (SelectList)ViewBag.EstadoReglamento, new { @class = "form-control", @disabled = "disabled" })
+                <span class="input-group-addon">
+                    <span class="fa fa-check-circle-o">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("Fecha de Confección", new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3 input-group date" id="fechaconf">
+                @Html.TextBoxFor(m => m.FECHA_CONFECCION, new { @class = "form-control", @disabled = "disabled" })
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar-times-o">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        <div class="form-group">
+            @Html.Label("FECHA DE VIGENCIA", new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3 input-group date" id="fechavig">
+                @Html.TextBoxFor(m => m.FECHA_VIGENCIA, new { @class = "form-control", @disabled = "disabled" })
+                <span class="input-group-addon">
+                    <span class="fa fa-calendar-check-o">
+                    </span>
+                </span>
+            </div>
+        </div>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <span class="col-md-offset-5 col-md-3 btn-block">
+                    <input type="submit" value="Eliminar" class="btn btn-danger" />
+                </span>
+            </div>
+        }
+
+

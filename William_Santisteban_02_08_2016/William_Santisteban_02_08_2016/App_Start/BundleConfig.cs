@@ -17,16 +17,21 @@ namespace William_Santisteban_02_08_2016
                         "~/Scripts/modernizr-*"));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
-                      "~/scripts/jquery-1.10.2.js",
-                      "~/scripts/bootstrap.js",
-                      "~/scripts/respond.js"));
+                      "~/Scripts/bootstrap.js",
+                      "~/Scripts/respond.js",
+                      "~/Scripts/moment.js",
+                      "~/Scripts/bootstrap.min.js",
+                      "~/Scripts/bootstrap-datetimepicker.*",
+                      "~/Scripts/club_home.js"
+             ));
 
             /*Estilos*/
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/font-awesome.css",
                       "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/Site.css"));
-
 
         }
     }

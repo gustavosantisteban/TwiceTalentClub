@@ -4,15 +4,16 @@
     ViewBag.Title = "Agregar";
 }
 
-<div class="col-md-8">
-    @using (Html.BeginForm("Agregar", "Reglamento", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    <h2>Agregar Reglamento</h2>
+    @using (Html.BeginForm("Agregar", "Reglamento", FormMethod.Post))
     {
         @Html.AntiForgeryToken()
-        @Html.ValidationSummary("", new { @class = "text-error" })
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        @Html.HiddenFor(model => model.Id)
 
         <div class="form-group">
-            @Html.LabelFor(m => m.NombreReglamento, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6 input-group">
+            @Html.LabelFor(m => m.NombreReglamento, new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3 input-group">
                 @Html.TextBoxFor(m => m.NombreReglamento, new { @class = "form-control" })
                 <span class="input-group-addon">
                     <span class="fa fa-wpforms">
@@ -22,20 +23,16 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Descripcion, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6 input-group">
+            @Html.LabelFor(m => m.Descripcion, new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3  input-group">
                 @Html.TextAreaFor(m => m.Descripcion, new { @class = "form-control" })
-                <span class="input-group-addon">
-                    <span class="fa fa-wpforms">
-                    </span>
-                </span>
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.Estado, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6 input-group">
-                @Html.DropDownListFor(m => m.Estado, ViewBag.EstadoReglamento as SelectList, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(m => m.Estado, new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3  input-group">
+                @Html.DropDownListFor(m => m.Estado, (SelectList)ViewBag.EstadoReglamento, new { @class = "form-control" })
                 <span class="input-group-addon">
                     <span class="fa fa-check-circle-o">
                     </span>
@@ -44,8 +41,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.FechaConfeccion, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6 input-group">
+            @Html.LabelFor(m => m.FechaConfeccion, new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3 input-group date" id="fechaconf">
                 @Html.TextBoxFor(m => m.FechaConfeccion, new { @class = "form-control" })
                 <span class="input-group-addon">
                     <span class="fa fa-calendar-times-o">
@@ -55,8 +52,8 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(m => m.FechaVigencia, new { @class = "col-md-2 control-label" })
-            <div class="col-md-6 input-group">
+            @Html.LabelFor(m => m.FechaVigencia, new { @class = "col-md-3 control-label" })
+            <div class="col-md-3 col-xs-8 col-lg-3 input-group date" id="fechavig">
                 @Html.TextBoxFor(m => m.FechaVigencia, new { @class = "form-control" })
                 <span class="input-group-addon">
                     <span class="fa fa-calendar-check-o">
@@ -65,5 +62,12 @@
             </div>
         </div>
 
+        <div class="form-group">
+            <span class="col-md-offset-5 col-md-3 btn-block">
+                <button type="submit" class="btn btn-primary">Guardar</button>
+            </span>
+        </div>
     }
-</div>
+
+
+@Scripts.Render("~/bundles/jqueryval")

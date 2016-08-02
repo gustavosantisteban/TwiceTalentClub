@@ -11,25 +11,27 @@
            <td>Identificacion</td>
             <td>Nombre</td>
             <td>Descripcion</td>
+            <td>Estado</td>
             <td>Fecha Confección</td>
             <td>Fecha Vigencia</td>
             <td>Acciones</td>
         </tr>
     </thead>
     <tbody>
+    @foreach (var reglamento in Model)
+    {
         <tr>
-        @foreach (var reglamento in Model)
-        {
             <td>@Html.DisplayFor(model => reglamento.ID_REGLAMENTO)</td>
             <td>@Html.DisplayFor(model => reglamento.NOMBRE_REGLAMENTO)</td>
             <td>@Html.DisplayFor(model => reglamento.DESC_REGLAMENTO)</td>
-            <td>@Html.DisplayFor(model => reglamento.FECHA_VIGENCIA)</td>
+            <td>@Html.DisplayFor(model => reglamento.ESTADO)</td>
             <td>@Html.DisplayFor(model => reglamento.FECHA_CONFECCION)</td>
+            <td>@Html.DisplayFor(model => reglamento.FECHA_VIGENCIA)</td>
             <td class="text-center">
                 <a href="@Url.Action("Editar", "Reglamento", new { id = reglamento.ID_REGLAMENTO })" class="btn btn-primary btn-xs"><span class="glyphicon glyphicon-edit"></span> Editar</a>
                 <a href="@Url.Action("Eliminar", "Reglamento", new { id = reglamento.ID_REGLAMENTO })" class="btn btn-danger btn-xs"><span class="glyphicon glyphicon-remove"></span> Eliminar</a>
             </td>
-        }
         </tr>
+    }
     </tbody>
 </table>

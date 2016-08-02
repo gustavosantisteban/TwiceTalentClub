@@ -8,6 +8,8 @@ namespace William_Santisteban_02_08_2016.ViewModels
 {
     public class ReglamentoViewModel
     {
+        public int? Id { get; set; }
+
         [Required]
         [Display(Name = "Nombre del Reglamento")]
         public string NombreReglamento { get; set; }
@@ -16,11 +18,13 @@ namespace William_Santisteban_02_08_2016.ViewModels
         public string Descripcion { get; set; }
         [Required]
         [Display(Name = "Estado")]
-        public string Estado { get; set; }
+        public Estado Estado { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha de Confección")]
         public DateTime FechaConfeccion { get; set; }
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Fecha de Vigencia")]
         public DateTime FechaVigencia { get; set; }
     }
