@@ -4,13 +4,14 @@
   <edmx:Runtime>
     <!-- SSDL content -->
     <edmx:StorageModels>
-      <Schema Namespace="ClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+    <Schema Namespace="ClubModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
         <EntityType Name="CLUB">
           <Key>
             <PropertyRef Name="ID_CLUB" />
           </Key>
           <Property Name="ID_CLUB" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DESC_CLUB" Type="nvarchar" MaxLength="200" Nullable="false" />
+          <Property Name="IMAGEN" Type="nvarchar" MaxLength="250" />
           <Property Name="ID_REGLAMENTO" Type="int" />
         </EntityType>
         <EntityType Name="CLUB_DEPORTE">
@@ -93,8 +94,7 @@
             <End Role="CLUB" EntitySet="CLUB" />
           </AssociationSet>
         </EntityContainer>
-      </Schema>
-    </edmx:StorageModels>
+      </Schema></edmx:StorageModels>
     <!-- CSDL content -->
     <edmx:ConceptualModels>
       <Schema Namespace="ClubModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
@@ -107,6 +107,7 @@
           <Property Name="ID_REGLAMENTO" Type="Int32" />
           <NavigationProperty Name="REGLAMENTO" Relationship="Self.FK_REGLAMENTO" FromRole="CLUB" ToRole="REGLAMENTO" />
           <NavigationProperty Name="DEPORTE" Relationship="Self.CLUB_DEPORTE" FromRole="CLUB" ToRole="DEPORTE" />
+          <Property Name="IMAGEN" Type="String" MaxLength="250" FixedLength="false" Unicode="true" />
         </EntityType>
         <EntityType Name="DEPORTE">
           <Key>
@@ -166,6 +167,7 @@
           <EntitySetMapping Name="CLUB">
             <EntityTypeMapping TypeName="ClubModel.CLUB">
               <MappingFragment StoreEntitySet="CLUB">
+                <ScalarProperty Name="IMAGEN" ColumnName="IMAGEN" />
                 <ScalarProperty Name="ID_CLUB" ColumnName="ID_CLUB" />
                 <ScalarProperty Name="DESC_CLUB" ColumnName="DESC_CLUB" />
                 <ScalarProperty Name="ID_REGLAMENTO" ColumnName="ID_REGLAMENTO" />

@@ -25,11 +25,16 @@ namespace William_Santisteban_02_08_2016
                       "~/Scripts/club_home.js"
              ));
 
+            bundles.Add(new ScriptBundle("~/bundles/typeahead").Include(
+                      "~/Scripts/typeahead.bundle.js",
+                      "~/Scripts/handlebars.js"));
+
             /*Estilos*/
             bundles.Add(new StyleBundle("~/Content/css").Include(
                       "~/Content/font-awesome.css",
                       "~/Content/bootstrap.css",
                       "~/Content/bootstrap.min.css",
+                      "~/Content/typeaheadjs.css",
                       "~/Content/bootstrap-datetimepicker.css",
                       "~/Content/Site.css"));
 

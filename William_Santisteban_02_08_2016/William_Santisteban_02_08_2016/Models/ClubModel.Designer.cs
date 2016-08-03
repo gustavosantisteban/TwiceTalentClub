@@ -1,4 +1,4 @@
-﻿// T4 code generation is enabled for model 'c:\users\willi\OneDrive\Documentos\Visual Studio 2015\Projects\William_Santisteban_02_08_2016\William_Santisteban_02_08_2016\Models\ClubModel.edmx'. 
+﻿// T4 code generation is enabled for model 'C:\Users\willi\OneDrive\Documentos\GitHub\TwiceTalentClub\William_Santisteban_02_08_2016\William_Santisteban_02_08_2016\Models\ClubModel.edmx'. 
 // To enable legacy code generation, change the value of the 'Code Generation Strategy' designer
 // property to 'Legacy ObjectContext'. This property is available in the Properties Window when the model
 // is open in the designer.

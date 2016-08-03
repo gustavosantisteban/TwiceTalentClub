@@ -1,5 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Data.Entity;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Net;
 using System.Web;
@@ -13,11 +15,52 @@ namespace William_Santisteban_02_08_2016.Controllers
     {
         private ClubContext context = new ClubContext();
         // GET: Reglamento
-        public ActionResult Index()
+        public ActionResult Index(DateTime? fecha)
         {
-            var listadoReglamento = context.REGLAMENTO.ToList();
+            var listadoReglamento = from l in context.REGLAMENTO
+                                    select l;
+
+            if (!String.IsNullOrEmpty(fecha.ToString()))
+            {
+                var fechaconv = Convert.ToDateTime(fecha).Date;
+                listadoReglamento = listadoReglamento.Where(x => DbFunctions.TruncateTime(x.FECHA_CONFECCION) == fechaconv).ToList().AsQueryable();
+            }
+            else
+            {
+                listadoReglamento = context.REGLAMENTO.ToList().AsQueryable();
+            }
+
             return View(listadoReglamento);
         }
+
+        //[HttpPost]
+        //public ActionResult Index(DateTime fecha)
+        //{
+        //    var listadoReglamentoxFecha = context.REGLAMENTO.Where(x => x.FECHA_CONFECCION.Date == fecha.Date).ToList();
+
+        //    return View(listadoReglamentoxFecha);
+        //}
+
+        [HttpPost]
+        public JsonResult BusquedaPorDescripcion(string descripcion)
+        {
+            descripcion = descripcion.ToUpper();
+            
+            IEnumerable<REGLAMENTO> reglamento = context.REGLAMENTO.Where(r => r.DESC_REGLAMENTO.ToUpper().Contains(descripcion));
+            reglamento.Select(x => new
+                {
+                    Identificacion = x.ID_REGLAMENTO,
+                    Nombre = x.NOMBRE_REGLAMENTO,
+                    Descripcion = x.DESC_REGLAMENTO,
+                    Estado = x.ESTADO,
+                    FechaConf = x.FECHA_CONFECCION,
+                    FechaVig = x.FECHA_VIGENCIA
+            }).ToList();
+            
+            return Json(reglamento, JsonRequestBehavior.AllowGet);
+        }
+
+
 
         public void EnumEstadoDropDownList()
         {

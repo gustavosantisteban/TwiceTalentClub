@@ -10,4 +10,10 @@
         defaultDate: new Date(),
         daysOfWeekDisabled: [0, 6]
     });
+
+    $('#fechadealta').datetimepicker({
+        format: 'DD/MM/YYYY',
+        defaultDate: new Date(),
+        daysOfWeekDisabled: [0, 6]
+    });
 });

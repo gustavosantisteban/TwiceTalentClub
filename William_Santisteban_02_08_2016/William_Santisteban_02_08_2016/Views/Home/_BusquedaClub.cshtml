@@ -1,0 +1,21 @@
+﻿<section id="main-slider" class="no-margin">
+            <div class="col-md-12 text-center">
+                <h1 class="text-primary">Encontrá a tu Club</h1>
+            </div>
+            <div class="col-lg-8 col-lg-offset-2">
+                <div class="well">
+                    @using (Html.BeginForm("MostrarClub", "Home", FormMethod.Get))
+                    {
+                        <div id="scrollable-dropdown-menu">
+                            <div id="mensaje-busqueda" class="input-group">
+                                @Html.ValidationSummary(true)
+                                @Html.TextBox("club", null, new { @class = "form-control", @placeholder = "Buscar por Especialidad y/o Profesional", @id = "searchClub" })
+                                <span class="input-group-btn">
+                                    <button type="submit" class="btn btn-danger">Buscar</button>
+                                </span>
+                            </div>
+                        </div><!-- /scrollable-dropdown-menu -->
+                    }
+                </div><!-- /well -->
+            </div><!-- /.col-lg-8 -->
+</section><!--/#busqueda-club-->

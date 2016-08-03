@@ -153,7 +153,12 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fonts\glyphicons-halflings-regular.svg" />
+    <Content Include="Content\images\centralcordoba.jpg" />
+    <Content Include="Content\images\clubes.jpeg" />
+    <Content Include="Content\images\newells.png" />
+    <Content Include="Content\images\rosariocentral.png" />
     <Content Include="Content\Site.css" />
+    <Content Include="Content\typeaheadjs.css" />
     <Content Include="fonts\fontawesome-webfont.svg" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
@@ -266,10 +271,22 @@
     <Content Include="Content\bootstrap\alerts.less" />
     <Content Include="Content\_bootstrap-datetimepicker.less" />
     <Content Include="Content\bootstrap-datetimepicker-build.less" />
+    <Content Include="App_Readme\Handlebarsjs_README.md" />
+    <Content Include="App_Readme\Handlebarsjs_LICENSE" />
     <None Include="scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="scripts\bloodhound.js" />
+    <Content Include="scripts\bloodhound.min.js" />
     <Content Include="scripts\bootstrap-datetimepicker.js" />
     <Content Include="scripts\bootstrap-datetimepicker.min.js" />
     <Content Include="scripts\club_home.js" />
+    <Content Include="scripts\handlebars.amd.js" />
+    <Content Include="scripts\handlebars.amd.min.js" />
+    <Content Include="scripts\handlebars.js" />
+    <Content Include="scripts\handlebars.min.js" />
+    <Content Include="scripts\handlebars.runtime.amd.js" />
+    <Content Include="scripts\handlebars.runtime.amd.min.js" />
+    <Content Include="scripts\handlebars.runtime.js" />
+    <Content Include="scripts\handlebars.runtime.min.js" />
     <Content Include="scripts\jquery-1.10.2.js" />
     <Content Include="scripts\jquery-1.10.2.min.js" />
     <Content Include="scripts\jquery-1.10.2.min.map" />
@@ -288,6 +305,10 @@
     <Content Include="scripts\respond.matchmedia.addListener.js" />
     <Content Include="scripts\respond.matchmedia.addListener.min.js" />
     <Content Include="scripts\respond.min.js" />
+    <Content Include="scripts\typeahead.bundle.js" />
+    <Content Include="scripts\typeahead.bundle.min.js" />
+    <Content Include="scripts\typeahead.jquery.js" />
+    <Content Include="scripts\typeahead.jquery.min.js" />
     <Content Include="Web.config" />
     <Content Include="Views\_ViewStart.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
@@ -297,6 +318,7 @@
   <ItemGroup>
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ReglamentoController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -337,6 +359,9 @@
     <Content Include="scripts\jquery-1.9.1.min.map" />
     <Content Include="Views\Reglamento\Editar.cshtml" />
     <Content Include="Views\Reglamento\Eliminar.cshtml" />
+    <Content Include="Views\Shared\Error.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\Home\_BusquedaClub.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

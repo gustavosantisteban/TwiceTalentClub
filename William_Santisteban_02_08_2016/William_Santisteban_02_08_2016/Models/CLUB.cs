@@ -23,6 +23,7 @@ namespace William_Santisteban_02_08_2016.Models
         public int ID_CLUB { get; set; }
         public string DESC_CLUB { get; set; }
         public Nullable<int> ID_REGLAMENTO { get; set; }
+        public string IMAGEN { get; set; }
     
         public virtual REGLAMENTO REGLAMENTO { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]

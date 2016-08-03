@@ -1,0 +1,56 @@
+﻿@model IEnumerable<William_Santisteban_02_08_2016.Models.CLUB>
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<header id="intro">
+    @Html.Partial("_BusquedaClub")
+</header>
+
+
+
+@section scripts{
+    <script type="text/javascript">
+        $(document).ready(function () {
+            var searchBoxBloodHound = new Bloodhound({
+                datumTokenizer: function (datum) {
+                    return Bloodhound.tokenizers.whitespace(datum.Club);
+                },
+                queryTokenizer: Bloodhound.tokenizers.whitespace,
+                remote: {
+                    url: '/Home/BuscarClub?busqueda=%QUERY',
+                    wildcard: '%QUERY',
+                    // the returned json contains an array of strings, but the Bloodhound
+                    // suggestion engine expects JavaScript objects so this converts all of
+                    // those strings into objects containing the properties, title and author
+                    filter: function (resultados) {
+                        return $.map(resultados, function (data) {
+                            return {
+                                club: data
+                            }
+                        });
+                    },
+
+                },
+
+            });
+
+            searchBoxBloodHound.initialize();
+
+            $('#scrollable-dropdown-menu #mensaje-busqueda #searchClub').typeahead(null, {
+                displayKey: 'club',
+                source: searchBoxBloodHound.ttAdapter(),
+                limit: 10,
+                templates: {
+                    empty: [
+                      '<div class="empty-message">',
+                        'Lo siento, no se pudo encontrar el Club...',
+                      '</div>'
+                    ].join('\n'),
+                    suggestion: Handlebars.compile('<p><strong>{{club}}</strong></p>')
+                }
+            });
+        });
+    </script>
+}

@@ -3,8 +3,29 @@
     ViewBag.Title = "Index";
 }
 
+<div class="search-panel">
+    <div class="pull-right position">
+        @Html.Label("Filtrar por Descripcion", new { @class = "col-md-3 control-label" })
+        <div class="input-group">
+            @Html.ValidationSummary(true)
+            @Html.TextBox("descripcion", null, new { @class = "form-control sr-posiciondesc", @placeholder = "Filtrar por Descripción", @id = "searchBox" })
+        </div>
+    </div>
+        @using (Html.BeginForm())
+        {
+            <div class="pull-right position">
+                @Html.Label("Filtrar por Fecha", new { @class = "col-md-3 control-label" })
+                <div class="input-group date">
+                    @Html.ValidationSummary(true)
+                    @Html.TextBox("fecha", null, new { @class = "sr-input form-control", @id = "fechadealta" })
+                    <button class="btn sr-btn" type="submit"><i class="fa fa-search"></i></button>
+                </div>
+            </div>
+        }
+</div>
+
 <h2>Listado de Reglamentos</h2>
-<a href="@Url.Action("Agregar", "Reglamento")" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-record"></span> Agregar Reglamento</a>
+<a href="@Url.Action("Agregar", "Reglamento")" class="btn btn-warning btn-xs"><span class="glyphicon glyphicon-book"></span> Agregar Reglamento</a>
 <table class="table table-striped">
     <thead>
         <tr>
@@ -17,7 +38,7 @@
             <td>Acciones</td>
         </tr>
     </thead>
-    <tbody>
+    <tbody id="ListaDeReglamentos">
     @foreach (var reglamento in Model)
     {
         <tr>
@@ -35,3 +56,37 @@
     }
     </tbody>
 </table>
+
+
+<script type="text/javascript">
+
+    $(document).ready(function () {
+        $("#searchBox").change(function () {
+            var descripcion = $("#searchBox").val();
+            var reqDiv = $("#ListaDeReglamentos");
+            var url = '/Reglamento/BusquedaPorDescripcion';
+            $.ajax({
+                cache: false,
+                type: "POST",
+                url: url,
+                data: { "descripcion": descripcion },
+                success: function (data) {
+                    var result = "";
+                    reqDiv.html('');
+                    $.each(data, function (descripcion, reglamento) {
+                        result += "<tr><td>'" + reglamento.Identificacion + "'</td>'" +
+                            "'<td>'" + reglamento.Nombre + "'</td>'" +
+                            "'<td>'" + reglamento.Descripcion + "'</td>'" +
+                            "'<td>'" + reglamento.Estado + "'</td>'" +
+                            "'<td>'" + reglamento.FechaConf + "'</td>'" +
+                            "'<td>'" + reglamento.FechaVig + "'</td></tr>'";
+                    });
+                    reqDiv.html(result);
+                },
+                error: function (xhr, ajaxOptions, thrownError) {
+                        alert('Fallo al recuperar los reglamentos.');
+                    }
+                });
+        });
+    });
+</script>  
